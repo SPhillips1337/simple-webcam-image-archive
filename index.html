@@ -1,0 +1,97 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <title>Simple Webcam Script</title>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+  <meta http-equiv="CACHE-CONTROL" content="NO-CACHE" />
+  <meta http-equiv="EXPIRES" content="Mon, 22 Jul 2002 11:12:01 GMT" />
+  <meta http-equiv="PRAGMA" content="NO-CACHE" />
+  
+	<script type="text/javascript" src="js/jquery-1.4.2.min.js"></script> 
+
+	<script type="text/javascript">	
+      	/* <![CDATA[ */
+
+		$(document).ready(function(){
+
+			$.preLoadImages(
+				"webcam.jpg"
+			);
+			
+		});  
+
+		var cache = [];
+		// Arguments are image paths relative to the current page.
+		$.preLoadImages = function() {
+		    var args_len = arguments.length;
+		    for (var i = args_len; i--;) {
+			var cacheImage = document.createElement('img');
+			cacheImage.src = arguments[i];
+		 	cache.push(cacheImage);
+		    }
+		} 
+
+	//]]>
+	</script>   
+
+	<style type="text/css">
+	div#webcamimageContainer {
+		width:320px;
+		height:240px;
+	}
+	
+	div#webcamimageContainer img {
+		width:320px;
+		height:240px;
+	}	
+	</style>
+	
+	<script type="text/javascript">
+	var webcamimage; 
+	var imgBase="webcam.jpg?"
+
+	function refreshImage() 
+	{ 
+		var rightnow = new Date();
+	 	webcamimage.src=imgBase+rightnow.getTime();
+	} 
+
+	function init() 
+	{ 
+		webcamimage 		= document.getElementById("webcamimage");
+	 	
+	 	refreshImage();
+	 
+	 if( webcamimage ) 
+	 { 
+	 
+      // change the value here to reflect how often you update the image file webcam.jpg (value shown is 15 seconds)
+      setInterval("refreshImage()",15000); 
+	 } 
+
+	} 
+	window.onload = init; 
+	</script> 
+
+</head>
+
+<body>
+
+  <h1>Simple Webcam Script</h1>
+        
+  <div style="background:#fff;float:left;">
+      <div  id="webcamimageContainer" style="float:left;width:320px;height:240px;background:#fff;">
+           <p align="center"><img src="#*$!webcam.jpg" name="image" id="webcamimage" style="width:320px;height:240px" alt="Simple Webcam Script" title="Simple Webcam Script" /></p>
+      </div>     		
+  </div>
+  <div style="clear:both;"></div>
+  <iframe src="recentListing.php" width="640" height="396" scrolling="no" frameborder="no"></iframe>
+  <div class="clear"></div>  
+  <a href="gallery.php" target="_blank">View Gallery</a> &nbsp;|&nbsp; <a href="dailyanim.php" target="_blank">Animation</a>
+  
+  <p><strong>Instructions:</strong></p>
+  <p>Simply upload the contents of this folder to your webserver, and set the image webcam.jpg to be writable, and upload from your webcam via ftp to the website as the file webcam.jpg, and every 15 seconds the image here will reload and show a new one!</p>
+  
+ 
+</body>
+</html>        
